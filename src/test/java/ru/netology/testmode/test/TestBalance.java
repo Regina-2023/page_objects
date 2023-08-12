@@ -15,7 +15,7 @@ public class TestBalance {
 
     @BeforeEach
     void setup() {
-        Configuration.browser = "firefox";
+        Configuration.browser = "chrome";
         open("http://localhost:9999");
 
     }
