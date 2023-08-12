@@ -1,6 +1,7 @@
 package ru.netology.testmode.test;
 
-//import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Configuration;
+
 import data.DataHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ public class TestBalance {
 
     @BeforeEach
     void setup() {
-//        Configuration.browser = "chrome";
+        Configuration.browser = "chrome";
         open("http://localhost:9999");
 
     }
@@ -33,7 +34,7 @@ public class TestBalance {
         balancePage.openFirstCard().addBalance(userInfo.amount, userInfo.secondCardNumber);
         balancePage.openSecondCard().addBalance(userInfo.amount, userInfo.firstCardNumber);
         var endFirstCardBalance = balancePage.getFirstCardBalance();
-        var endSecondCardBalance = balancePage.getFirstCardBalance();
+        var endSecondCardBalance = balancePage.getSecondCardBalance();
         assertThat(startFirstCardBalance).isEqualTo(endFirstCardBalance);
         assertThat(startSecondCardBalance).isEqualTo(endSecondCardBalance);
     }
