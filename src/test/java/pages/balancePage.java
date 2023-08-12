@@ -27,11 +27,11 @@ public class balancePage {
     }
     public String getFirstCardBalance(){
         var firstBalance = balances.get(0).text();
-        return firstBalance.substring(firstBalance.lastIndexOf(":")+1,firstBalance.lastIndexOf("\n")).strip();
+        return firstBalance.substring(firstBalance.lastIndexOf(":")+1,firstBalance.lastIndexOf("р")).strip();
     }
 
     public String getSecondCardBalance(){
         var secondBalance = balances.get(1).text();
-        return secondBalance.substring(secondBalance.lastIndexOf(":")+1,secondBalance.lastIndexOf("\n")).strip();
+        return secondBalance.substring(secondBalance.lastIndexOf(":")+1,secondBalance.lastIndexOf("р")).strip();
     }
 }
