@@ -1,0 +1,26 @@
+package pages;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
+
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
+
+public class increaseBalance {
+    private SelenideElement h1Text = $("h1");
+    private SelenideElement amount = (SelenideElement) $$("input[type='text']").get(0);
+    private SelenideElement cardNumber = $("input[type='tel']");
+    private SelenideElement submitButton = $("button[data-test-id='action-transfer']");
+
+    public increaseBalance() {
+        h1Text.shouldBe(Condition.visible);
+    }
+
+    public balancePage addBalance(String amountRUB, String card) {
+        amount.setValue(amountRUB);
+        cardNumber.setValue(card);
+        submitButton.click();
+        return new balancePage();
+    }
+
+}
