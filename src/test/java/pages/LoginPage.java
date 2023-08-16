@@ -9,11 +9,11 @@ public class LoginPage {
     private SelenideElement passwordField = $("input[name='password']");
     private SelenideElement submitField = $("span[class='button__text']");
 
-    public codePage login(String login, String password) {
+    public CodePage login(String login, String password) {
         loginField.setValue(login);
         passwordField.setValue(password);
         submitField.click();
-        return new codePage();
+        return new CodePage();
 
     }
 

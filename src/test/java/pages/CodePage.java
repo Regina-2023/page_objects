@@ -5,18 +5,18 @@ import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selenide.$;
 
-public class codePage {
+public class CodePage {
     private SelenideElement codeField = $("input[name='code']");
     private SelenideElement submitField = $("span[class='button__text']");
 
-    public codePage() {
+    public CodePage() {
         codeField.shouldBe(Condition.visible);
     }
 
-    public balancePage sendCode(String code) {
+    public BalancePage sendCode(String code) {
         codeField.setValue(code);
         submitField.click();
-        return new balancePage();
+        return new BalancePage();
 
     }
 }

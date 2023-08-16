@@ -7,23 +7,23 @@ import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class balancePage {
+public class BalancePage {
     private SelenideElement refreshButtonField = $("button[data-test-id='action-reload']");
     private ElementsCollection listIncreaseButtonField = $$("button[data-test-id='action-deposit']");
     private ElementsCollection balances = $$("[class='list__item']");
 
-    public balancePage() {
+    public BalancePage() {
         refreshButtonField.shouldBe(Condition.visible);
     }
 
-    public increaseBalance openFirstCard() {
+    public IncreaseBalance openFirstCard() {
         listIncreaseButtonField.get(0).click();
-        return new increaseBalance();
+        return new IncreaseBalance();
     }
 
-    public increaseBalance openSecondCard() {
+    public IncreaseBalance openSecondCard() {
         listIncreaseButtonField.get(1).click();
-        return new increaseBalance();
+        return new IncreaseBalance();
     }
     public String getFirstCardBalance(){
         var firstBalance = balances.get(0).text();

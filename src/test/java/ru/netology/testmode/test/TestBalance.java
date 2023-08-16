@@ -24,15 +24,18 @@ public class TestBalance {
 
     @Test
     void testTwoCard() {
-        var userInfo = new DataHelper();
+        var user = DataHelper.getAuthInfo();
+        var code = DataHelper.getVerificationCode();
+        var firstCard = DataHelper.getFirstCard();
+        var secondCard = DataHelper.getSecondCard();
 
         var loginPage = new LoginPage();
-        var codePage = loginPage.login(userInfo.username, userInfo.password);
-        var balancePage = codePage.sendCode(userInfo.code);
+        var codePage = loginPage.login(user.getLogin(), user.getPassword());
+        var balancePage = codePage.sendCode(code.getCode());
         var startFirstCardBalance = balancePage.getFirstCardBalance();
         var startSecondCardBalance = balancePage.getSecondCardBalance();
-        balancePage.openFirstCard().addBalance(userInfo.amount, userInfo.secondCardNumber);
-        balancePage.openSecondCard().addBalance(userInfo.amount, userInfo.firstCardNumber);
+        balancePage.openFirstCard().addBalance(firstCard.getAmount(), secondCard.getSecondCardNumber());
+        balancePage.openSecondCard().addBalance(secondCard.getAmount(), firstCard.getFirstCardNumber());
         var endFirstCardBalance = balancePage.getFirstCardBalance();
         var endSecondCardBalance = balancePage.getSecondCardBalance();
         assertThat(startFirstCardBalance).isEqualTo(endFirstCardBalance);
