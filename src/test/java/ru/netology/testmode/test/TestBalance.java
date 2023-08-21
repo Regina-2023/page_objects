@@ -1,7 +1,6 @@
 package ru.netology.testmode.test;
 
 import com.codeborne.selenide.Configuration;
-
 import data.DataHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,27 +20,36 @@ public class TestBalance {
 
     }
 
-
     @Test
-    void testTwoCard() {
+    void testFirstCard() {
         var user = DataHelper.getAuthInfo();
         var code = DataHelper.getVerificationCode();
-        var firstCard = DataHelper.getFirstCard();
-        var secondCard = DataHelper.getSecondCard();
-
+        var firstCard = DataHelper.getCard("5559000000000001", "5");
         var loginPage = new LoginPage();
         var codePage = loginPage.login(user.getLogin(), user.getPassword());
         var balancePage = codePage.sendCode(code.getCode());
+
         var startFirstCardBalance = balancePage.getFirstCardBalance();
-        var startSecondCardBalance = balancePage.getSecondCardBalance();
-        balancePage.openFirstCard().addBalance(firstCard.getAmount(), secondCard.getSecondCardNumber());
-        balancePage.openSecondCard().addBalance(secondCard.getAmount(), firstCard.getFirstCardNumber());
+        balancePage.openSecondCard().addBalance(firstCard.getAmount(), firstCard.getCardNumber());
         var endFirstCardBalance = balancePage.getFirstCardBalance();
+        var expectedBalance = Integer.parseInt(startFirstCardBalance) - Integer.parseInt(firstCard.getAmount());
+        assertThat(Integer.parseInt(endFirstCardBalance)).isEqualTo(expectedBalance);
+    }
+
+
+    @Test
+    void testSecondCard() {
+        var user = DataHelper.getAuthInfo();
+        var code = DataHelper.getVerificationCode();
+        var secondCard = DataHelper.getCard("5559000000000002", "7");
+        var loginPage = new LoginPage();
+        var codePage = loginPage.login(user.getLogin(), user.getPassword());
+        var balancePage = codePage.sendCode(code.getCode());
+
+        var startSecondCardBalance = balancePage.getSecondCardBalance();
+        balancePage.openFirstCard().addBalance(secondCard.getAmount(), secondCard.getCardNumber());
         var endSecondCardBalance = balancePage.getSecondCardBalance();
-        assertThat(startFirstCardBalance).isEqualTo(endFirstCardBalance);
-        assertThat(startSecondCardBalance).isEqualTo(endSecondCardBalance);
+        var expectedBalance = Integer.parseInt(startSecondCardBalance) - Integer.parseInt(secondCard.getAmount());
+        assertThat(Integer.parseInt(endSecondCardBalance)).isEqualTo(expectedBalance);
     }
 }
-
-
-
