@@ -2,7 +2,7 @@ package data;
 
 import lombok.Value;
 
-@Value
+
 public class DataHelper {
     private DataHelper() {
     }
