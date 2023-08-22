@@ -28,11 +28,16 @@ public class DataHelper {
 
     @Value
     public static class Card {
-        String CardNumber;
+        String cardNumber;
         String amount;
     }
 
-    public static Card getCard(String cardNumber, String amount) {
-        return new Card(cardNumber, amount);
+
+    public static Card getFirstCard(){
+        return new Card("5559 0000 0000 0001", "1");
+    }
+
+    public static  Card getSecondCard(){
+        return new Card("5559 0000 0000 0002", "1");
     }
 }
